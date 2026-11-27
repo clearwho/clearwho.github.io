@@ -29,10 +29,14 @@
 
     .page {
       width: min(calc(100% - 3rem), 58rem);
-      margin: clamp(3.5rem, 11vw, 8rem) auto 4rem;
-      padding-top: clamp(2rem, 5vw, 3.5rem);
+      min-height: 100vh;
+      min-height: 100svh;
+      margin: 0 auto;
+      padding-top: calc(clamp(3.5rem, 11vw, 8rem) + clamp(2rem, 5vw, 3.5rem));
+      padding-bottom: 3rem;
       display: grid;
       grid-template-columns: minmax(10rem, 1fr) minmax(0, 2.45fr);
+      align-content: start;
       gap: clamp(2rem, 6vw, 4rem);
     }
 
@@ -95,6 +99,51 @@
       margin: 0.8rem 0 0;
     }
 
+    .artwork-footer {
+      overflow: hidden;
+      padding: clamp(0.75rem, 3vw, 2.5rem) 1rem clamp(2.5rem, 6vw, 5rem);
+    }
+
+    .artwork {
+      width: min(100%, 58rem);
+      margin: 0 auto;
+    }
+
+    .artwork-image {
+      position: relative;
+      isolation: isolate;
+    }
+
+    .artwork-image img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    .artwork-blur {
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      filter: blur(clamp(12px, 2.4vw, 34px));
+      transform: scale(1.04);
+      opacity: 0.24;
+      mask-image: radial-gradient(ellipse, #000 31%, transparent 72%);
+    }
+
+    .artwork-focus {
+      mask-image:
+        linear-gradient(to right, transparent, #000 17%, #000 83%, transparent),
+        linear-gradient(to bottom, transparent, #000 15%, #000 83%, transparent);
+      mask-composite: intersect;
+    }
+
+    .artwork-caption {
+      margin-top: 0.65rem;
+      color: var(--text);
+      font-size: 0.875rem;
+      text-align: center;
+    }
+
     @media (max-width: 38rem) {
       .page {
         grid-template-columns: minmax(0, 1fr);
@@ -123,5 +172,36 @@
       </section>
     </main>
   </div>
+
+  <footer class="artwork-footer">
+    <figure class="artwork">
+      <div class="artwork-image">
+        <img
+          class="artwork-blur"
+          src="https://w.wallhaven.cc/full/m3/wallhaven-m38lo1.png"
+          alt=""
+          aria-hidden="true"
+          width="3538"
+          height="2560"
+          loading="lazy"
+          decoding="async"
+          referrerpolicy="no-referrer"
+        >
+        <img
+          class="artwork-focus"
+          src="https://w.wallhaven.cc/full/m3/wallhaven-m38lo1.png"
+          alt="A lone climber ascending a snowy slope"
+          width="3538"
+          height="2560"
+          loading="lazy"
+          decoding="async"
+          referrerpolicy="no-referrer"
+        >
+      </div>
+      <figcaption class="artwork-caption">
+        <a href="https://www.whvn.cc/w/m38lo1"><cite>The Climber</cite></a> · Shin’ichi Sakamoto
+      </figcaption>
+    </figure>
+  </footer>
 </body>
 </html>
